@@ -1,8 +1,9 @@
 const express =require('express');
 const mongoose=require('mongoose')
+var cors = require('cors')
 const app=express();
 const router=require('./routes/authroute');
-
+app.use(cors())
 app.use(express.json());
 
 const mongouri='mongodb+srv://userSimon:SimonntHJ3322@cluster0.ckww6.mongodb.net/userData?retryWrites=true&w=majority';
