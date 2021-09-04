@@ -6,7 +6,7 @@ const userSchema=new Schema({
     email:{
         type:String,
         required:[true,'Please enter an email' ],
-        unique:true,
+        
         lowercase:true,
         
     },
@@ -14,7 +14,7 @@ const userSchema=new Schema({
         type:String,
         
         required:[true, 'please enter a password'],
-        minlength:[6, 'password must be of 6 characters']
+       
     },
      
      
