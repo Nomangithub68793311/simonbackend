@@ -15,7 +15,7 @@ console.log('mongo connected');
 })
 .catch((err)=>{console.log(err)});
 app.get('/',(req,res)=>{
-    res.send('yes got it');
+    res.send('yes got it now');
     // console.log('done')
 
 })
