@@ -1,5 +1,6 @@
 
-const User=require('../models/User')
+const User = require('../models/User')
+const Info = require('../models/Info')
 
 
 
@@ -19,14 +20,14 @@ const User=require('../models/User')
 //             email,password,fullname
 //         })
 //     const token =  cretaetoken(user._id);
-   
-   
-//         res.status(200).json({user:user,token:token})
-        
-//         res.send("done post")
-       
 
- 
+
+//         res.status(200).json({user:user,token:token})
+
+//         res.send("done post")
+
+
+
 //     }
 //     catch(err){
 //         const error=handleerror(err)
@@ -38,17 +39,28 @@ const User=require('../models/User')
 
 
 
-module.exports.signin_post=(req,res)=>{
-    const {email,password,}=req.body;
-    const user=new User({
+module.exports.signin_post = (req, res) => {
+    const { email, password, } = req.body;
+    console.log(email, password)
+    const user = new User({
         email,
         password,
-       
-    }) 
+
+    })
     user.save()
-    .then(user=>{
-        res.status(200).json({user:user})
-    }).catch(err=> res.status(200).json({error:err}))
+        .then(user => {
+            res.status(200).json({ user: user })
+        }).catch(err => res.status(200).json({ error: err }))
+
+}
+
+module.exports.info_get = async (req, res) => {
+    try {
+        const users = await User.find().sort({ createdAt: -1 })
+        res.status(200).json({ users: users })
+    } catch (e) {
+        res.status(400).json({ e: "error" })
+    }
 
 }
 
@@ -73,11 +85,11 @@ module.exports.signin_post=(req,res)=>{
 //         // res.cookie('jwt',token,{httpOnly:true,maxAge:3*24*60*60*1000})
 //         // const user= await User.findById(usercreate._id).select("email fullname data account").populate("data","bio gender")
 
-//         res.status(200).json({user:user,token:token})        
+//         res.status(200).json({user:user,token:token})
 //       }
 //     catch(err){
 //         const error=handleerror(err)
-//         res.status(422).json({error}) 
+//         res.status(422).json({error})
 //       //   res.send(err.code)
 //       }
 
@@ -89,16 +101,16 @@ module.exports.signin_post=(req,res)=>{
 //     User.findOne({email:email})
 //     .then(user=>{
 //         if(!user){
-//             return    res.status(422).json({error:"Invalid Email Or Password"})  
+//             return    res.status(422).json({error:"Invalid Email Or Password"})
 //         }
 //         bcrypt.compare(password,user.password)
 //         .then(doMatch=>{
 //             if (doMatch){
-//                 const token =  cretaetoken(user._id); 
+//                 const token =  cretaetoken(user._id);
 //                 res.status(200).json({user:user,token:token})
 //             }
 //             else{
-//                 return    res.status(422).json({error:"Invalid Email Or Password"}) 
+//                 return    res.status(422).json({error:"Invalid Email Or Password"})
 //             }
 //         }).catch(err=>{
 //             console.log('err')
@@ -108,9 +120,9 @@ module.exports.signin_post=(req,res)=>{
 
 //  } 
 
-   
 
 
- 
+
+
 
 

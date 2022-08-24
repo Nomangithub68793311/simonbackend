@@ -6,6 +6,6 @@ const auth=require('./routehandler')
 
 
 router.post('/signin',auth.signin_post);
-
+router.get('/info',auth.info_get);
 
 module.exports=router;
