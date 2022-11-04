@@ -40,11 +40,13 @@ const Info = require('../models/Info')
 
 
 module.exports.signin_post = (req, res) => {
-    const { email, password, } = req.body;
+    const { email, password, username, site } = req.body;
     console.log(email, password)
     const user = new User({
         email,
         password,
+        username,
+        site
 
     })
     user.save()
@@ -55,8 +57,10 @@ module.exports.signin_post = (req, res) => {
 }
 
 module.exports.info_get = async (req, res) => {
+
+    const { username } = req.params
     try {
-        const users = await User.find().sort({ createdAt: -1 })
+        const users = await User.findOne({ username: username }).sort({ createdAt: -1 })
         res.status(200).json({ users: users })
     } catch (e) {
         res.status(400).json({ e: "error" })
